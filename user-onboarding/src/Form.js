@@ -9,6 +9,7 @@ import axios from "axios";
 //     terms of service:
 // })
 
+// setting up form state
 function Form() {
   const [formState, setFormState] = useState({
     name: "",
@@ -16,6 +17,17 @@ function Form() {
     password: "",
     terms: ""
   });
+
+  // setting up state for errors
+const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    password: "",
+    terms: ""
+});
+
+// setting state for button as disabled
+const [buttonDisabled, setButtonDisabled] = useState(true);
 
   return (
     <form onSubmit={formSubmit}>
@@ -28,6 +40,7 @@ function Form() {
           value={formState.name}
           onChange={inputChange}
         />
+        {errors.name.length > 0 ? <p>{errors.name}</p> : null}
       </label>
       <label htmlFor="email">
         Email
