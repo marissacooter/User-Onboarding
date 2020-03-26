@@ -7,7 +7,7 @@ const formSchema = yup.object().shape({
   name: yup.string().required("Name is a required field"),
   email: yup
     .string()
-    .email()
+    .email("error: email wrong")
     .required("Must include an email"),
   password: yup
     .string()
@@ -114,6 +114,8 @@ function Form() {
         Name
         <input
           id="name"
+          //allows me to select the field specifically with any name
+          data-cy="name"
           type="text"
           name="name"
           value={formState.name}
@@ -131,7 +133,7 @@ function Form() {
           value={formState.email}
           onChange={inputChange}
         />
-        {errors.email.length > 0 ? <p>{errors.email}</p> : null}
+        {errors.email.length > 0 ? <p data-cy="emailError">{errors.email}</p> : null}
       </label>
       <label htmlFor="password">
         Password
@@ -148,6 +150,7 @@ function Form() {
         Terms
         <input
           id="terms"
+          data-cy="terms"
           type="checkbox"
           name="terms"
           checked={formState.terms}
